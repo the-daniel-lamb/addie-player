@@ -84,3 +84,21 @@ audio {
     font-size: 0.9rem;
   }
 }
+
+.credits {
+  margin-top: 30px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  color: #ff4d88;
+}
+
+.credits a {
+  color: #ff65a3;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.credits a:hover {
+  color: #ff007f;
+  text-decoration: underline;
+}
