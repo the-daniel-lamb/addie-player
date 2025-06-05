@@ -2,27 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Eso Mamona</title>
+  <title>Daniel's Dream Station🎶</title>
   <link rel="stylesheet" href="css/styles.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
   <div class="container">
+    <h1 id="song-title">Loading song...</h1>
 
-    <h1 id="song-title">Loading...</h1>
+    <div class="player-frame">
+      <audio id="audio" controls></audio>
 
-    <audio id="audio" controls></audio>
-
-    <div class="controls">
-      <button onclick="prevSong()">⏮</button>
-      <button onclick="playPause()">▶️/⏸</button>
-      <button onclick="nextSong()">⏭</button>
+      <div class="controls">
+        <button onclick="prevSong()">⏮</button>
+        <button onclick="playPause()">▶️ / ⏸</button>
+        <button onclick="nextSong()">⏭</button>
+      </div>
     </div>
 
-    <div id="lyrics" class="lyrics-box">
-      Loading lyrics...
-    </div>
-
+    <div id="lyrics" class="lyrics-box">Loading lyrics...</div>
   </div>
 
   <script src="js/player.js"></script>
