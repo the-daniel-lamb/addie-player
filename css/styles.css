@@ -1,0 +1,15 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 50px;
+}
+.controls button {
+  font-size: 24px;
+  margin: 10px;
+}
+#lyrics {
+  white-space: pre-wrap;
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 20px;
+}
