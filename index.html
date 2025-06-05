@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Songs</title>
+  <title>My Song Player</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <h1 id="song-title">Loading...</h1>
   <audio id="audio" controls></audio>
-  <div id="lyrics">Loading lyrics...</div>
 
   <div class="controls">
     <button onclick="prevSong()">⏮️</button>
     <button onclick="playPause()">▶️⏸️</button>
     <button onclick="nextSong()">⏭️</button>
   </div>
+
+  <div id="lyrics">Loading lyrics...</div>
 
   <script src="js/player.js"></script>
 </body>
