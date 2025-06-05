@@ -98,3 +98,7 @@ audio.addEventListener('ended', nextSong);
 
 // Initialize
 loadTrackList();
+
+function unlock() {
+  document.getElementById('unlock-overlay').style.display = 'none';
+}
