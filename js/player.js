@@ -1,30 +1,57 @@
 let currentSong = 1;
-const totalSongs = 12;  // ⚠️ Update for your number of songs
+let totalSongs = 0;
+let trackList = [];
 
+// DOM references
 const audio = document.getElementById('audio');
 const title = document.getElementById('song-title');
 const lyricsDiv = document.getElementById('lyrics');
 
+// Load tracklist from tracks.txt if exists
+function loadTrackList() {
+  fetch('tracks.txt')
+    .then(res => res.text())
+    .then(data => {
+      trackList = data.split(/\r?\n/).filter(line => line.trim() !== '');
+      totalSongs = trackList.length;
+      loadSong();
+    })
+    .catch(err => {
+      console.warn("No tracks.txt found, fallback to default");
+      totalSongs = 12; // fallback number - UPDATE THIS if needed
+      loadSong();
+    });
+}
+
+// Load specific song
 function loadSong() {
   const songName = `${currentSong}.m4a`;
   const lyricsName = `${currentSong}.txt`;
 
-  // 💡 FIXED HERE: fetch real song name
   fetch(`lyrics/${lyricsName}`)
     .then(res => res.text())
     .then(data => {
-      const lines = data.split('\n');
+      const lines = data.split(/\r?\n/);
       const firstLine = lines[0].trim();
-      if (firstLine.startsWith('TITLE:')) {
-        title.textContent = firstLine.replace('TITLE:', '').trim();
+
+      if (firstLine.toUpperCase().startsWith('TITLE:')) {
+        const songTitle = firstLine.substring(6).trim();
+        title.textContent = songTitle;
         lyricsDiv.textContent = lines.slice(1).join('\n').trim();
+      } else if (trackList.length >= currentSong) {
+        title.textContent = trackList[currentSong - 1];
+        lyricsDiv.textContent = data;
       } else {
         title.textContent = `Song ${currentSong}`;
         lyricsDiv.textContent = data;
       }
     })
     .catch(err => {
-      title.textContent = `Song ${currentSong}`;
+      if (trackList.length >= currentSong) {
+        title.textContent = trackList[currentSong - 1];
+      } else {
+        title.textContent = `Song ${currentSong}`;
+      }
       lyricsDiv.textContent = "No lyrics available.";
     });
 
@@ -52,4 +79,6 @@ function prevSong() {
 }
 
 audio.addEventListener('ended', nextSong);
-loadSong();
+
+// Initialize
+loadTrackList();
