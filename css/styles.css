@@ -96,6 +96,7 @@ audio {
   color: #ff65a3;
   text-decoration: none;
   transition: 0.3s;
+  text-decoration: underline dashed;
 }
 
 .credits a:hover {
