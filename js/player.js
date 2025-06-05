@@ -100,5 +100,13 @@ audio.addEventListener('ended', nextSong);
 loadTrackList();
 
 function unlock() {
+  localStorage.setItem('unlocked', 'true');
   document.getElementById('unlock-overlay').style.display = 'none';
 }
+
+window.addEventListener('load', () => {
+  const unlocked = localStorage.getItem('unlocked');
+  if (unlocked === 'true') {
+    document.getElementById('unlock-overlay').style.display = 'none';
+  }
+});
