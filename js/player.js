@@ -1,30 +1,15 @@
 let currentSong = 1;
-let totalSongs = 12;
-let trackTitles = [];
+const totalSongs = 3;  // UPDATE THIS VALUE to match your songs count
 
 const audio = document.getElementById('audio');
 const title = document.getElementById('song-title');
 const lyricsDiv = document.getElementById('lyrics');
 
-function loadTracks() {
-  fetch('tracks.txt')
-    .then(res => res.text())
-    .then(data => {
-      trackTitles = data.trim().split('\n').map(line => line.trim());
-      totalSongs = trackTitles.length;
-      loadSong();
-    })
-    .catch(err => {
-      alert("Failed to load tracklist.");
-      console.error(err);
-    });
-}
-
 function loadSong() {
   const songName = `${currentSong}.m4a`;
   const lyricsName = `${currentSong}.txt`;
 
-  title.textContent = `${currentSong}. ${trackTitles[currentSong - 1]}`;
+  title.textContent = `Song ${currentSong}`;
   audio.src = `songs/${songName}`;
 
   fetch(`lyrics/${lyricsName}`)
@@ -42,26 +27,16 @@ function playPause() {
 }
 
 function nextSong() {
-  if (currentSong < totalSongs) {
-    currentSong++;
-  } else {
-    currentSong = 1;
-  }
+  currentSong = currentSong < totalSongs ? currentSong + 1 : 1;
   loadSong();
   audio.play();
 }
 
 function prevSong() {
-  if (currentSong > 1) {
-    currentSong--;
-  } else {
-    currentSong = totalSongs;
-  }
+  currentSong = currentSong > 1 ? currentSong - 1 : totalSongs;
   loadSong();
   audio.play();
 }
 
 audio.addEventListener('ended', nextSong);
-
-// Initialize:
-loadTracks();
+loadSong();
