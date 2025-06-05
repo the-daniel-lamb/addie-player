@@ -34,24 +34,24 @@ function loadSong() {
       const lines = data.split(/\r?\n/);
       const firstLine = lines[0].trim();
 
+      let songTitle = '';
+
       if (firstLine.toUpperCase().startsWith('TITLE:')) {
-        const songTitle = firstLine.substring(6).trim();
-        title.textContent = songTitle;
+        songTitle = firstLine.substring(6).trim();
         lyricsDiv.textContent = lines.slice(1).join('\n').trim();
       } else if (trackList.length >= currentSong) {
-        title.textContent = trackList[currentSong - 1];
+        songTitle = trackList[currentSong - 1];
         lyricsDiv.textContent = data;
       } else {
-        title.textContent = `Song ${currentSong}`;
+        songTitle = `Song ${currentSong}`;
         lyricsDiv.textContent = data;
       }
+
+      title.textContent = `${currentSong}. ${songTitle}`;
     })
     .catch(err => {
-      if (trackList.length >= currentSong) {
-        title.textContent = trackList[currentSong - 1];
-      } else {
-        title.textContent = `Song ${currentSong}`;
-      }
+      let fallbackTitle = trackList.length >= currentSong ? trackList[currentSong - 1] : `Song ${currentSong}`;
+      title.textContent = `${currentSong}. ${fallbackTitle}`;
       lyricsDiv.textContent = "No lyrics available.";
     });
 
