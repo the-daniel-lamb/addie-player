@@ -1,5 +1,5 @@
 let currentSong = 1;
-const totalSongs = 3;  // UPDATE THIS VALUE to match your songs count
+const totalSongs = 12;  // UPDATE THIS VALUE to match your songs count
 
 const audio = document.getElementById('audio');
 const title = document.getElementById('song-title');
