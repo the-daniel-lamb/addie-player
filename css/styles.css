@@ -93,13 +93,13 @@ audio {
 }
 
 .credits a {
-  color: #ff65a3;
+  color: #4c020f;
   text-decoration: none;
   transition: 0.3s;
-  text-decoration: underline dashed;
+  text-decoration: underline;
 }
 
 .credits a:hover {
-  color: #ff007f;
+  color: #4c020f;
   text-decoration: underline;
 }
