@@ -1,5 +1,5 @@
 let currentSong = 1;
-let totalSongs = 3; // you can update manually or automate
+const totalSongs = 3;  // UPDATE THIS NUMBER TO MATCH YOUR SONG COUNT
 
 const audio = document.getElementById('audio');
 const title = document.getElementById('song-title');
@@ -15,7 +15,7 @@ function loadSong() {
   fetch(`lyrics/${lyricsName}`)
     .then(res => res.text())
     .then(data => lyricsDiv.textContent = data)
-    .catch(err => lyricsDiv.textContent = "No lyrics available");
+    .catch(err => lyricsDiv.textContent = "No lyrics available.");
 }
 
 function playPause() {
@@ -29,19 +29,22 @@ function playPause() {
 function nextSong() {
   if (currentSong < totalSongs) {
     currentSong++;
-    loadSong();
-    audio.play();
+  } else {
+    currentSong = 1; // Loop back to first song
   }
+  loadSong();
+  audio.play();
 }
 
 function prevSong() {
   if (currentSong > 1) {
     currentSong--;
-    loadSong();
-    audio.play();
+  } else {
+    currentSong = totalSongs; // Go to last song
   }
+  loadSong();
+  audio.play();
 }
 
 audio.addEventListener('ended', nextSong);
-
 loadSong();
