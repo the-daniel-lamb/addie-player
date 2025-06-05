@@ -18,7 +18,7 @@ function loadTrackList() {
     })
     .catch(err => {
       console.warn("No tracks.txt found, fallback to default");
-      totalSongs = 12; // fallback number - UPDATE THIS if needed
+      totalSongs = 12; // fallback number
       loadSong();
     });
 }
@@ -61,8 +61,16 @@ function loadSong() {
 function playPause() {
   if (audio.paused) {
     audio.play();
+    gtag('event', 'play', {
+      'event_category': 'Audio Player',
+      'event_label': `Song ${currentSong}`
+    });
   } else {
     audio.pause();
+    gtag('event', 'pause', {
+      'event_category': 'Audio Player',
+      'event_label': `Song ${currentSong}`
+    });
   }
 }
 
@@ -70,12 +78,20 @@ function nextSong() {
   currentSong = currentSong < totalSongs ? currentSong + 1 : 1;
   loadSong();
   audio.play();
+  gtag('event', 'next_song', {
+    'event_category': 'Audio Player',
+    'event_label': `Song ${currentSong}`
+  });
 }
 
 function prevSong() {
   currentSong = currentSong > 1 ? currentSong - 1 : totalSongs;
   loadSong();
   audio.play();
+  gtag('event', 'prev_song', {
+    'event_category': 'Audio Player',
+    'event_label': `Song ${currentSong}`
+  });
 }
 
 audio.addEventListener('ended', nextSong);
